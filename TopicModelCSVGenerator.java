@@ -1,6 +1,21 @@
+/*  TopicModelCSVGenerator.java
+ *      Morgan VandenBerg
+ *      mvandenberg@smu.edu
+ *      SMU AI Lab
+ *
+ *   Used to generate a giant CSV from millions of individual topic model files.
+ *  NOTE: almost all users should use the threaded version of this code instead.
+ *      -The exception is if you have a high-performance disk system that will
+ *       cause the code to be CPU-bound instead of read-speed-bound
+ *
+ */
+
 import java.io.*;
 
-public class DirWalker {
+public class TopicModelCSVGenerator {
+    // Change the input directory to the root for the topic model files generation
+    public final static INPUT_DIR ="../scratch/CORD19_Topic_Models/";
+
     public static class TopicModel {
         String[] words;
         double[] weights;
@@ -13,18 +28,15 @@ public class DirWalker {
 
 
     public static void main(String[] args) throws Exception {
-        String inputDir = "../scratch/CORD19_Topic_Models/";
-        System.out.println("Listed files.");
+
         String line;
-
         TopicModelSet[] models = new TopicModelSet[500_000];
-
         System.out.println("Allocated mem.");
 
         for (int docNum = 0; docNum < 500_000; docNum++) {
             TopicModel[] docTopics = new TopicModel[15];
             for (int topicNum = 0; topicNum < 15; topicNum++) {
-                File f = new File(inputDir + "_model_doc_" + docNum + "_" + topicNum + ".topic");
+                File f = new File(INPUT_DIR + "_model_doc_" + docNum + "_" + topicNum + ".topic");
                 if (!f.exists()) continue;
                 BufferedReader bR = new BufferedReader(new FileReader(f));
                 int counter = 0;
@@ -35,7 +47,7 @@ public class DirWalker {
                     weights[counter] = Double.parseDouble(line.substring(line.indexOf(' ') + 1));
                     counter++;
                 }
-//                bR.close();
+                bR.close();
                 docTopics[topicNum] = new TopicModel();
                 docTopics[topicNum].words = words;
                 docTopics[topicNum].weights = weights;
@@ -46,7 +58,7 @@ public class DirWalker {
                 models[docNum].models = docTopics;
                 models[docNum].documentNumber = docNum;
             }
-            if (docNum % 100 == 0) System.out.println("Read " + docNum);
+            if (docNum % 1000 == 0) System.out.println("Read " + docNum);
         }
 
 
@@ -65,7 +77,7 @@ public class DirWalker {
                     }
                 }
             }
-            if (docID % 100 == 0) System.out.println("Wrote " + docID);
+            if (docID % 1000 == 0) System.out.println("Wrote " + docID);
         }
         bW.close();
         System.out.println("Done writing.");

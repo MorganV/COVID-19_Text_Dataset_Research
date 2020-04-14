@@ -99,7 +99,6 @@ public class TopicModelCSVGeneratorThreaded {
         }
 
         while (read < 500000 - 500) {
-//            if (read % 100 == 0)
             System.out.println(read);
             Thread.sleep(10000);
         }
@@ -108,39 +107,6 @@ public class TopicModelCSVGeneratorThreaded {
             readers[i].join();
             System.out.println("Joined... " + i);
         }
-
-
-        //   System.exit(0);
-
-
-//        for (int docNum = 0; docNum < 500_000; docNum++) {
-//            TopicModel[] docTopics = new TopicModel[15];
-//            for (int topicNum = 0; topicNum < 15; topicNum++) {
-//                File f = new File(inputDir + "_model_doc_" + docNum + "_" + topicNum + ".topic");
-//                if (!f.exists()) continue;
-//                BufferedReader bR = new BufferedReader(new FileReader(f));
-//                int counter = 0;
-//                String[] words = new String[10];
-//                double[] weights = new double[10];
-//                while ((line = bR.readLine()) != null) {
-//                    words[counter] = line.substring(0, line.indexOf(' '));
-//                    weights[counter] = Double.parseDouble(line.substring(line.indexOf(' ') + 1));
-//                    counter++;
-//                }
-//                bR.close();
-//                docTopics[topicNum] = new TopicModel();
-//                docTopics[topicNum].words = words;
-//                docTopics[topicNum].weights = weights;
-//            }
-//            if (docTopics[0] != null) {
-//                // means that the topics existed
-//                models[docNum] = new TopicModelSet();
-//                models[docNum].models = docTopics;
-//                models[docNum].documentNumber = docNum;
-//            }
-//            if (docNum % 100 == 0) System.out.println("Read " + docNum);
-//        }
-//
 
         System.out.println("Finished reading. Writing output.");
         BufferedWriter bW = new BufferedWriter(new FileWriter(new File("topic_models_mthread.csv")));

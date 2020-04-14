@@ -35,7 +35,7 @@ public class DirWalker {
                     weights[counter] = Double.parseDouble(line.substring(line.indexOf(' ') + 1));
                     counter++;
                 }
-                bR.close();
+//                bR.close();
                 docTopics[topicNum] = new TopicModel();
                 docTopics[topicNum].words = words;
                 docTopics[topicNum].weights = weights;

@@ -1,7 +1,18 @@
+/*  TopicModelCSVGenerator.java
+ *      Morgan VandenBerg
+ *      mvandenberg@smu.edu
+ *      SMU AI Lab
+ *
+ *   Used to generate a giant CSV from millions of individual topic model files.
+ *
+ */
+
+
 import java.io.*;
 
-public class DirWalkerThreaded {
-    public static final String inputDir = "../scratch/CORD19_Topic_Models/";
+public class TopicModelCSVGeneratorThreaded {
+    // Change the input directory to the root for the topic model files generation
+    public static final String INPUT_DIR = "../scratch/CORD19_Topic_Models/";
 
     public static int read = 0;
 
@@ -32,7 +43,7 @@ public class DirWalkerThreaded {
             for (int docNum = lower; docNum < upper; docNum++) {
                 TopicModel[] docTopics = new TopicModel[15];
                 for (int topicNum = 0; topicNum < 15; topicNum++) {
-                    File f = new File(inputDir + "_model_doc_" + docNum + "_" + topicNum + ".topic");
+                    File f = new File(INPUT_DIR + "_model_doc_" + docNum + "_" + topicNum + ".topic");
                     if (!f.exists()) continue;
                     BufferedReader bR = null;
                     try {
@@ -89,8 +100,8 @@ public class DirWalkerThreaded {
 
         while (read < 500000 - 500) {
 //            if (read % 100 == 0)
-                System.out.println(read);
-Thread.sleep(10000);
+            System.out.println(read);
+            Thread.sleep(10000);
         }
 
         for (int i = 0; i < readers.length; i++) {

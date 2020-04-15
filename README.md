@@ -15,6 +15,6 @@ Link here: https://smu.box.com/s/8ht6y6q1tjezvi4aukb7kyvd8c5df0oe
 
 And, if anyone wants the raw similarity scores, here are the saved NumPy arrays for those in the format of `arr[docIndex] = simScore(promptTopics, docTopics)` with three metrics (Jaccard, word-embedding, and topic-embedding):
 
-Jaccard: https://smu.box.com/s/gcg1pnm20q2mzh6i4bjryhezrhntzxtm
-Word Embeddings: https://smu.box.com/s/el8n7ezrfhp2gs3s2ghkrt2v2uohleh6
+Jaccard: https://smu.box.com/s/gcg1pnm20q2mzh6i4bjryhezrhntzxtm \
+Word Embeddings: https://smu.box.com/s/el8n7ezrfhp2gs3s2ghkrt2v2uohleh6 \
 Topic Embeddings: https://smu.box.com/s/q1y19359hi8yyw2up9syz9p3dw1ot9ww
